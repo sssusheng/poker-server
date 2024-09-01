@@ -189,15 +189,15 @@ bool HttpRequest::processHttpRequest(HttpResponse *response) {
         //sendFile(file, cfd);
         // 响应头
         response->addHeader("Content-type", getFileType(file));
-        response->addHeader("Content-length", to_string(st.st_size));
+        response->addHeader("Content-length", std::to_string(st.st_size));
         response->sendDataFunc = sendFile;
     }
 
     return false;
 }
 
-string HttpRequest::decodeMsg(string msg) {
-    string str = string();
+std::string HttpRequest::decodeMsg(std::string msg) {
+    std::string str = std::string();
     const char *from = msg.data();
     for (; *from != '\0'; ++from) {
         // isxdigit -> 判断字符是不是16进制格式, 取值在 0-f
@@ -219,7 +219,7 @@ string HttpRequest::decodeMsg(string msg) {
     return str;
 }
 
-const string HttpRequest::getFileType(const string name) {
+const std::string HttpRequest::getFileType(const std::string name) {
     // a.jpg a.mp4 a.html
     // 自右向左查找‘.’字符, 如不存在返回NULL
     const char *dot = strrchr(name.data(), '.');
@@ -259,7 +259,7 @@ const string HttpRequest::getFileType(const string name) {
     return "text/plain; charset=utf-8";
 }
 
-void HttpRequest::sendDir(string dirName, Buffer *sendBuf, int cfd) {
+void HttpRequest::sendDir(std::string dirName, Buffer *sendBuf, int cfd) {
     char buf[4096] = {0};
     sprintf(buf, "<html><head><title>%s</title></head><body><table>", dirName.data());
     struct dirent **namelist;
@@ -298,7 +298,7 @@ void HttpRequest::sendDir(string dirName, Buffer *sendBuf, int cfd) {
     free(namelist);
 }
 
-void HttpRequest::sendFile(string fileName, Buffer *sendBuf, int cfd) {
+void HttpRequest::sendFile(std::string fileName, Buffer *sendBuf, int cfd) {
     // 1. 打开文件
     int fd = open(fileName.data(), O_RDONLY);
     assert(fd > 0);

@@ -9,8 +9,7 @@ class EventLoop;
 
 class Dispatcher {
 public:
-    Dispatcher(EventLoop *evloop): m_evLoop(evloop) {
-    };
+    Dispatcher(EventLoop *evloop);
 
     virtual ~Dispatcher();
 

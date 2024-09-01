@@ -19,7 +19,7 @@ add_subdirectory(thread)
 add_subdirectory(tcp)
 add_subdirectory(http)
 
-link_libraries(http tcp thread reactor common)
+link_libraries(tcp http thread reactor common)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
