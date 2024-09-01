@@ -79,7 +79,7 @@ int Buffer::socketRead(int fd) {
     vec[0].iov_base = m_data + m_writePos;
     vec[0].iov_len = writeable;
     char *tmpbuf = (char *) malloc(40960);
-    vec[1].iov_base = m_data + m_writePos;
+    vec[1].iov_base = tmpbuf;
     vec[1].iov_len = 40960;
     int result = readv(fd, vec, 2);
     if (result == -1) {

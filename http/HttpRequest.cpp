@@ -262,12 +262,12 @@ const std::string HttpRequest::getFileType(const std::string name) {
 void HttpRequest::sendDir(std::string dirName, Buffer *sendBuf, int cfd) {
     char buf[4096] = {0};
     sprintf(buf, "<html><head><title>%s</title></head><body><table>", dirName.data());
-    struct dirent **namelist;
-    int num = scandir(dirName.data(), &namelist, NULL, alphasort);
+    dirent **namelist;
+    int num = scandir(dirName.data(), &namelist, nullptr, alphasort);
     for (int i = 0; i < num; ++i) {
         // 取出文件名 namelist 指向的是一个指针数组 struct dirent* tmp[]
         char *name = namelist[i]->d_name;
-        struct stat st;
+        struct stat st{};
         char subPath[1024] = {0};
         sprintf(subPath, "%s/%s", dirName.data(), name);
         stat(subPath, &st);
