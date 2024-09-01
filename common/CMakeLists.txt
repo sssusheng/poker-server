@@ -7,5 +7,6 @@ aux_source_directory(./ SRC)
 
 add_library(common STATIC ${SRC}
         Channel.h
+        Buffer.h
         Log.h
 )
