@@ -10,7 +10,7 @@
 
 
 // 处理该节点中的channel的方式
-enum class ElemType:char { ADD, DELETE, MODIFY };
+enum struct ElemType:char { ADD, DELETE, MODIFY };
 
 // 定义任务队列的节点
 struct ChannelElement {
@@ -24,18 +24,18 @@ class EventLoop {
 public:
     EventLoop();
 
-    EventLoop(const std::string threadName);
+    EventLoop(const std::string &threadName);
 
     ~EventLoop();
 
     // 启动反应堆模型
     int run();
 
-    // 处理别激活的文件fd
+    // 处理被激活的文件fd
     int eventActive(int fd, int event);
 
     // 添加任务到任务队列
-    int addTask(struct Channel *channel, ElemType type);
+    int addTask(Channel *channel, ElemType type);
 
     // 处理任务队列中的任务
     int processTaskQ();
@@ -78,7 +78,7 @@ private:
     std::thread::id m_threadID;
     std::string m_threadName;
     std::mutex m_mutex;
-    int m_socketPair[2]; // 存储本地通信的fd 通过socketpair 初始化
+    int m_socketPair[2]{}; // 存储本地通信的fd 通过socketpair 初始化
 };
 
 

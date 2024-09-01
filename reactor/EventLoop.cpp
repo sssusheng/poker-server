@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <cstdio>
+#include <cstring>
 #include <string>
 #include "SelectDispatcher.h"
 #include "PollDispatcher.h"
@@ -13,14 +14,14 @@
 EventLoop::EventLoop() : EventLoop(std::string()) {
 }
 
-EventLoop::EventLoop(const std::string threadName) {
+EventLoop::EventLoop(const std::string &threadName) {
     m_isQuit = true; // 默认没有启动
     m_threadID = std::this_thread::get_id();
-    m_threadName = threadName == std::string() ? "MainThread" : threadName;
+    m_threadName = threadName.empty() ? "MainThread" : threadName;
     m_dispatcher = new SelectDispatcher(this);
     // map
     m_channelMap.clear();
-    int ret = socketpair(AF_UNIX, SOCK_STREAM, 0, m_socketPair);
+    const int ret = socketpair(AF_UNIX, SOCK_STREAM, 0, m_socketPair);
     if (ret == -1) {
         perror("socketpair");
         exit(0);
