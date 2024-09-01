@@ -6,4 +6,6 @@ set(CMAKE_CXX_STANDARD 17)
 aux_source_directory(./ SRC)
 
 add_library(common STATIC ${SRC}
-    Channel.h)
+        Channel.h
+        Log.h
+)

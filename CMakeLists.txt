@@ -8,14 +8,16 @@ include_directories(
         ${PROJECT_SOURCE_DIR}/common
         ${PROJECT_SOURCE_DIR}/reactor
         ${PROJECT_SOURCE_DIR}/thread
+        ${PROJECT_SOURCE_DIR}/tcp
 )
 
 # 添加子目录
 add_subdirectory(common)
 add_subdirectory(reactor)
 add_subdirectory(thread)
+add_subdirectory(tcp)
 
-link_libraries(thread reactor common)
+link_libraries(tcp thread reactor common)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
