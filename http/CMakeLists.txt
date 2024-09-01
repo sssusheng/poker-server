@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.22)
+project(http)
+
+set(CMAKE_CXX_STANDARD 17)
+
+aux_source_directory(./ SRC)
+
+add_library(http STATIC ${SRC}
+        HttpRequest.h
+        HttpResponse.h
+)
