@@ -1,6 +1,5 @@
 #include "Channel.h"
 
-#include <utility>
 
 Channel::Channel(const int fd, FDEvent events, handleFunc readFunc, handleFunc writeFunc, handleFunc destroyFunc,
                  void *arg) {
@@ -12,7 +11,7 @@ Channel::Channel(const int fd, FDEvent events, handleFunc readFunc, handleFunc w
     destroyCallback = std::move(destroyFunc);
 }
 
-void Channel::writeEventEnable(bool flag) {
+void Channel::writeEventEnable(const bool flag) {
     if (flag) {
         m_events |= static_cast<int>(FDEvent::WriteEvent);
     } else {
@@ -20,6 +19,6 @@ void Channel::writeEventEnable(bool flag) {
     }
 }
 
-bool Channel::isWriteEventEnable() {
+bool Channel::isWriteEventEnable() const {
     return m_events & static_cast<int>(FDEvent::WriteEvent);
 }

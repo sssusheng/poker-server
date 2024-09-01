@@ -28,7 +28,7 @@ public:
     void writeEventEnable(bool flag);
 
     // 判断是否需要检测文件描述符的写事件
-    bool isWriteEventEnable();
+    bool isWriteEventEnable() const;
 
     // 取出私有成员的值
     inline int getEvent() {
