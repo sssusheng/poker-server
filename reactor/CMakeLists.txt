@@ -1,17 +1,11 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.10)
 project(reactor)
 
 set(CMAKE_CXX_STANDARD 17)
 
 # 添加源文件和头文件
 aux_source_directory(./ SRC)
+file(GLOB HEADERS ${PROJECT_SOURCE_DIR}/*.h)
 
-# 创建静态库
-add_library(reactor STATIC ${SRC}
-        Dispatcher.h
-        EpollDispatcher.h
-        PollDispatcher.h
-        SelectDispatcher.h
-        EventLoop.h
-)
+add_library(reactor STATIC ${SRC} ${HEADERS})
 

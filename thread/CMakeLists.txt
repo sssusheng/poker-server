@@ -1,14 +1,11 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.10)
 project(thread)
 
 set(CMAKE_CXX_STANDARD 17)
 
 # 添加源文件和头文件
 aux_source_directory(./ SRC)
+file(GLOB HEADERS ${PROJECT_SOURCE_DIR}/*.h)
 
-# 创建静态库
-add_library(thread STATIC ${SRC}
-        WorkerThread.h
-        ThreadPool.h
-)
-
+add_library(thread STATIC ${SRC} ${HEADERS})
+target_link_libraries(thread pthread)
